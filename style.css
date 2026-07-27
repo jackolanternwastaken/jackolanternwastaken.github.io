@@ -1,0 +1,141 @@
+@font-face 
+{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+.topButtons
+{
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	background-color: rgb(0, 150, 250);
+	padding: 2%;
+	font-size: 30px;
+	font-family: inherit;
+	font-weight: 600;
+	border-radius: 25px;
+}
+.topButtons:hover
+{
+	background-color:blue;
+	transition: all 1.5s;
+}
+#goBtn
+{
+	padding: 2%;
+}
+#topHead
+{
+	display: flex;
+	justify-content: center;
+}
+nav
+{
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: flex-start;
+}
+body
+{
+	font-family: "Montserrat", sans-serif;
+	background-image: url("images/water.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
+}
+section
+{
+	display: flex;
+	justify-content: center;
+}
+#gamebox
+{
+	background: rgb(0, 119, 190);
+	border: 2px solid black;
+	display: flex;
+	width: 75vw;
+	height: 25vh;
+	position: relative
+}
+#player
+{
+	position: absolute;
+	transition: all 0.2s;
+	top: 90px;
+}
+#enemykayak
+{
+	position: absolute;
+	transition: all 0.2s;
+}
+.arrange
+{
+	flex-direction: column;
+	background: rgba(173, 216, 230, 0.7);
+    padding: 5%;
+    border-radius: 10px;
+	max-width: 80%;
+}
+h1
+{
+	font-size: 50px;
+}
+h2
+{
+	font-size: 35px;
+}
+p, li, a
+{
+	font-size: 18px;
+}
+/*CSS for responsive menu*/
+#hamIcon{display:none;}
+@media (max-width:800px){
+/*make a menu items vertical*/
+nav
+{
+	display: flex;
+	flex-direction: column;
+}
+header
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+#topHead
+{
+	display: flex;
+	justify-content: center;
+	margin: 0;
+}
+/* unhide menu icon */
+#hamIcon
+{
+	display: flex;
+	margin-left: 15px;
+	justify-content: center;
+	flex-direction: column;
+	width: 60px;
+	font-size: 30px;
+}
+
+/*hide the menu item list*/
+nav
+{
+	display: none;
+	flex-direction: column;
+	width: 100%;
+}
+.topButtons
+{
+	width: 100%;
+	flex: none;
+}
+}
+/*to unhide menu items*/
+.menuShow{display:flex;}
