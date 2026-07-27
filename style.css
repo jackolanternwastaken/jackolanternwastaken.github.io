@@ -91,6 +91,15 @@ p, li, a
 {
 	font-size: 18px;
 }
+footer
+{
+	color: white;
+	padding: 4%;
+	background-color: black;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /*CSS for responsive menu*/
 #hamIcon{display:none;}
 @media (max-width:800px){
@@ -136,6 +145,11 @@ nav
 	width: 100%;
 	flex: none;
 }
+#test
+{
+	height: 65vh;
+}
+#qrCodeImg{display:none;}
 }
 /*to unhide menu items*/
 .menuShow{display:flex;}
