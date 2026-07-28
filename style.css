@@ -149,7 +149,12 @@ footer
 #hamIcon{display:none;}
 @media (max-width:800px){
 /*make a menu items vertical*/
-
+.big
+{
+	display: flex;
+	width: 70vw;
+	height: auto;
+}
 .sprite {
     background-image: url('images/spritesheet.png');
     background-repeat: no-repeat;
