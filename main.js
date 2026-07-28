@@ -31,8 +31,27 @@ page2.style.display="none";
 page3.style.display="none"; 
 page4.style.display="none";
 }
+
+const a=document.querySelector(".menuShow");
+
+console.log(a);
+a.addEventListener("click", hamburger);
+function hamburger(e){
+	console.log(this); //see who received.
+	var sender=e.target;
+	console.log(sender); //see who is sender
+	
+	hideall();
+	if (sender.textContent == page1btn.textContent) page1.style.display = "flex";
+	if (sender.textContent == page2btn.textContent) page2.style.display = "flex";
+	if (sender.textContent == page3btn.textContent) page3.style.display = "flex";
+	if (sender.textContent == page4btn.textContent) page4.style.display = "flex";
+}
+
 /*Listen for clicks on the buttons, assign anonymous
 eventhandler functions to call show function*/
+
+/*
 page1btn.addEventListener("click", function () { 
 hideall(); //we don't know which page is shown, so hideall
 page1.style.display="flex";
@@ -49,6 +68,7 @@ page4btn.addEventListener("click", function () {
 hideall(); //we don't know which page is shown, so hideall
 page4.style.display="flex";
 });
+*/
 homeBtn.addEventListener("click", function () {
     hideall();
     mainMenu.style.display = "flex";
