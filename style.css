@@ -223,6 +223,7 @@ nav
 	height: 65vh;
 }
 #qrCodeImg{display:none;}
+.mobiledontshow{display:none;}
 }
 /*to unhide menu items*/
 .menuShow{display:flex;}
