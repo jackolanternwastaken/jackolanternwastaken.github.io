@@ -1,0 +1,13 @@
+{ "name": "Kayaking",
+"short_name": "A2",
+"start_url": "index.html",
+"display": "standalone",
+"background_color": "#ffffff",
+"theme_color": "#00FF00",
+"icons": [
+{ "src": "images/favicon.png",
+"sizes": "64x64",
+"type": "image/png"
+}
+]
+}

@@ -70,8 +70,7 @@ page4.style.display="flex";
 });
 */
 homeBtn.addEventListener("click", function () {
-    hideall();
-    mainMenu.style.display = "flex";
+    location.reload();                
 });
 
 hideall();
