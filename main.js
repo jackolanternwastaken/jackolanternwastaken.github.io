@@ -214,3 +214,41 @@ function move()
     }
 }
 
+
+
+// fullscreen---------------------------------------
+const btnFS=document.querySelector("#btnFS");
+btnFS.addEventListener("click",toggleFullscreen);
+
+var isFullscreen = false;
+
+
+function toggleFullscreen() { //must be called by user generated event
+if (document.documentElement.requestFullscreen && !isFullscreen) {
+document.documentElement.requestFullscreen();
+isFullscreen = true;
+} else if (document.documentElement.mozRequestFullScreen && !isFullscreen) { // Firefox
+document.documentElement.mozRequestFullScreen();
+isFullscreen = true;
+} else if (document.documentElement.webkitRequestFullscreen && !isFullscreen) { // Chrome, Safari, and Opera
+document.documentElement.webkitRequestFullscreen();
+isFullscreen = true;
+} else if (document.documentElement.msRequestFullscreen && !isFullscreen) { // IE/Edge
+document.documentElement.msRequestFullscreen();
+isFullscreen = true;
+}
+// exit
+if (document.exitFullscreen && isFullscreen) {
+document.exitFullscreen();
+isFullscreen = false;
+} else if (document.mozCancelFullScreen && isFullscreen) { // Firefox
+document.mozCancelFullScreen();
+isFullscreen = false;
+} else if (document.webkitExitFullscreen && isFullscreen) { // Chrome, Safari, and Opera
+document.webkitExitFullscreen();
+isFullscreen = false;
+} else if (document.msExitFullscreen && isFullscreen) { // IE/Edge
+document.msExitFullscreen();
+isFullscreen = false;
+}
+}

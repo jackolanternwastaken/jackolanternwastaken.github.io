@@ -97,13 +97,29 @@ footer
 	padding: 4%;
 	background-color: black;
 	display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+	
+}
+#test
+{
+	height: 40vh;
+}
+#arrange2
+{
+	display:flex;
+	flex-direction: column;
+	color: rgba(255, 255, 255, 0.6)
 }
 /*CSS for responsive menu*/
 #hamIcon{display:none;}
 @media (max-width:800px){
 /*make a menu items vertical*/
+.big
+{
+	width: 70vw;
+	height: auto;
+}
 nav
 {
 	display: flex;
