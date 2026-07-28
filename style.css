@@ -3,7 +3,11 @@
     font-family: "Montserrat";
     src: url("fonts/Montserrat-VariableFont_wght.ttf");
 }
-
+@keyframes pulse {
+	0% { transform: scale(1); }
+	50% { transform: scale(1.1); }
+	100% { transform: scale(1); }
+}
 .topButtons
 {
 	display: flex;
@@ -29,6 +33,7 @@
 {
 	display: flex;
 	justify-content: center;
+	animation: pulse 1.5s infinite ease-in-out;
 }
 nav
 {
@@ -111,15 +116,67 @@ footer
 	flex-direction: column;
 	color: rgba(255, 255, 255, 0.6)
 }
+
+
+.sprite {
+    background-image: url('images/spritesheet.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+	
+	background-size: 650px 1300px;
+	
+	width: 650px;  /* Width of a single icon frame */
+	height: 325px; /* Height of a single icon frame */
+}
+
+.forwardstroke {
+    background-position: -0px -0px;
+}
+
+.reversestroke {
+    background-position: -0px -325px;
+}
+
+.sweepstroke {
+    background-position: -0px -650px;
+}
+
+.drawstroke {
+    background-position: -0px -975px;
+}
+
 /*CSS for responsive menu*/
 #hamIcon{display:none;}
 @media (max-width:800px){
 /*make a menu items vertical*/
-.big
-{
-	width: 70vw;
-	height: auto;
+
+.sprite {
+    background-image: url('images/spritesheet.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+	
+	background-size: 70vw 130vw;
+	
+	width: 70vw;  /* Width of a single icon frame */
+	height: 32.5vw; /* Height of a single icon frame */
 }
+
+.forwardstroke {
+    background-position: -0px -0px;
+}
+
+.reversestroke {
+    background-position: -0px -32.5vw;
+}
+
+.sweepstroke {
+    background-position: -0px -65vw;
+}
+
+.drawstroke {
+    background-position: -0px -97.5vw;
+}
+
 nav
 {
 	display: flex;
