@@ -15,7 +15,7 @@ hamBtn.innerHTML="☰"; //change button text open menu
 // switch pages
 //target all elements to save to constants
 const mainMenu = document.querySelector("#mainMenu");
-const homeBtn = document.querySelector("#topHead")
+const homeBtn = document.querySelector("#topHead");
 const page1btn=document.querySelector("#TOKBtn");
 const page2btn=document.querySelector("#BPSBtn");
 const page3btn=document.querySelector("#RescueBtn");
@@ -57,7 +57,7 @@ hideall(); //we don't know which page is shown, so hideall
 page1.style.display="flex";
 });
 page2btn.addEventListener("click", function () { 
-hideall(); //we don't know which page is shown, so hideall
+hideall(); //we don't know which page is shown, so hideall                 THIS WHOLE CHUNK IS BEFORE I ADDED EVENT DELEGATION
 page2.style.display="flex";
 });
 page3btn.addEventListener("click", function () {
@@ -107,12 +107,12 @@ scorebox.innerHTML="Score:"+score;
 // game -------------------------------------------------------------------------------
 	
 const player = document.getElementById("player");
-const enemykayak = document.getElementById("enemykayak");
+const enemykayak = document.getElementById("enemykayak");        //things
 const gamebox = document.getElementById("gamebox");
 
 const startBtn = document.getElementById("startBtn");
 const paddleBtn = document.getElementById("goBtn");
-const resetBtn = document.getElementById("resetBtn");
+const resetBtn = document.getElementById("resetBtn");     // buttons
 const easyBtn = document.getElementById("easyBtn");
 const hardBtn = document.getElementById("hardBtn");
 
@@ -120,79 +120,95 @@ const result = document.getElementById("result");
 
 const winSound = new Audio("audio/win.mp3");
 const loseSound = new Audio("audio/lose.mp3");
-const tiredSound = new Audio("audio/tired.mp3");
+const tiredSound = new Audio("audio/tired.mp3");   //audio
 
-var playerPos = 0
+var playerPos = 0;
 var enemyPos = 0;
-var enemyMovement;
+var enemyMovement;              // variables
+var tiredMeter;
+var paddleRegen;
+var timer;
+var score = 0;
+var highScore = 0;
+var time = 0;
 var enemySpeed = 5;
 var paddleCount = 0;
-var paddleLimit = 15;
+var paddleLimit = 15;  // <-- when player paddles to this variable amount got cooldown
 
 var gameStarted = false;
-var gameReset = true;
+var gameReset = true;       //booleans
 var tired = false;
+var hardMode = false;
 
 
-easyBtn.addEventListener("click", function() {
+easyBtn.addEventListener("click", function() {   //sets image to easy kayak and lowers speed and paddle cooldown/limit 
 	if (!gameStarted && gameReset) {
 		enemykayak.src = "images/gameeasykayak.png";
-		enemySpeed = 5;
+		enemySpeed = 5; 
 		paddleLimit = 15;
+		hardMode = false;
     }
 });
 
-hardBtn.addEventListener("click", function() {
+hardBtn.addEventListener("click", function() {  // same thing but hard increases paddlelimit so game is beatable
 	if (!gameStarted && gameReset) {
 		enemykayak.src = "images/gamehardkayak.png";
 		enemySpeed = 9;
-		paddleLimit = 30;
+		paddleLimit = 20;
+		hardMode = true;
 	}
 });
 
-startBtn.addEventListener("click", function() {
+startBtn.addEventListener("click", function() {  // starts game and moves enemy
 	if (!gameStarted && gameReset) {
 		gameStarted = true;
 		gameReset = false;
+		timer = setInterval(countTime, 1000);
 		enemyMovement = setInterval(moveEnemy, 100);
+		tiredMeter = setInterval(update, 10);
+		paddleRegen = setInterval(regen, 200);
 	}
 });
 
-paddleBtn.addEventListener("click", function() {
+paddleBtn.addEventListener("click", function() {  //paddling
 	if (gameStarted && !tired)
 	{
-		move();
+		move(); //move obviously
 		
-		paddleCount++
+		paddleCount++; //increases paddlecount by 1 with each click
 		
-		if (paddleCount >= paddleLimit)
+		if (paddleCount >= paddleLimit)  //if paddle reaches limit then cooldown
 		{
 			tired = true;
 			paddleBtn.innerHTML = "TIRED!";
-			paddleBtn.disabled = true;
+			paddleBtn.disabled = true; //disables button
 			
 			tiredSound.play();
 			
 			setTimeout(function()
 			{
-				paddleCount = 0;
+				paddleCount = 0; // resets paddle count to 0 after cooldown
 				tired = false;
-				paddleBtn.disabled = false;
+				paddleBtn.disabled = false; // enables the button after 1.5s
 				paddleBtn.innerHTML = "PADDLE";
-			}, 1500);
+			}, 3000); //heres the actual cooldown
 		}
 	}
 });
 
 
 
-resetBtn.addEventListener("click", function() {
+resetBtn.addEventListener("click", function() { //resets everything except difficulty
 
     clearInterval(enemyMovement);
+	clearInterval(tiredMeter);
+	clearInterval(timer);
+	clearInterval(paddleRegen);
 
     playerPos = 0;
     enemyPos = 0;
 	paddleCount = 0;
+	time = 0;
 
     player.style.left = "0px";
     enemykayak.style.left = "0px";
@@ -207,13 +223,16 @@ resetBtn.addEventListener("click", function() {
 function moveEnemy()
 {
     enemyPos += enemySpeed;
-    enemykayak.style.left = enemyPos + "px";
+    enemykayak.style.left = enemyPos + "px"; //moves enemy
 
-    if (enemyPos >= gamebox.clientWidth - enemykayak.clientWidth) {
+    if (enemyPos >= gamebox.clientWidth - enemykayak.clientWidth) { //when enemy reaches end
 
-        clearInterval(enemyMovement);
-		gameStarted = false;
-        result.innerHTML = "You lose!";
+        clearInterval(enemyMovement); //stops enemy from moving
+		clearInterval(tiredMeter);
+		clearInterval(timer);
+		clearInterval(paddleRegen);
+		gameStarted = false; //stops the game so u cant paddle
+        result.innerHTML = "You lose!"; //lose
 		loseSound.play();
     }
 
@@ -221,19 +240,51 @@ function moveEnemy()
 
 function move()
 {
-	playerPos += 15;
+	playerPos += 15; // moves player with click
 	player.style.left = playerPos + "px";
 
-    if (playerPos >= gamebox.clientWidth - player.clientWidth) {
+    if (playerPos >= gamebox.clientWidth - player.clientWidth) { //when player reaches end
 
-        clearInterval(enemyMovement);
-		gameStarted = false;
-        result.innerHTML = "You win!";
+        clearInterval(enemyMovement); // stops enemy from moving
+		clearInterval(tiredMeter);
+		clearInterval(timer);
+		clearInterval(paddleRegen);
+		gameStarted = false; //ends game so u cant paddle
+		if (!hardMode)
+		{
+			score = (100 / time) * 10;
+			score = Math.round(score);
+		} else if(hardMode)
+		{
+			score = (100 / time) * 20;
+			score = Math.round(score);
+		}
+		
+		if (score >= highScore)
+		{
+			highScore = score;
+		}
+		
+        result.innerHTML = "You win! Score: " + score + " Highscore: " + highScore; //win
 		winSound.play();
     }
 }
 
-
+function update()
+{
+	result.innerHTML = "Overheat: " + paddleCount + " Time: " + time;
+}
+function regen()
+{
+	if (paddleCount != 0 && !tired)
+	{
+		paddleCount -= 1;
+	}
+}
+function countTime()
+{
+	time++;
+}
 
 // fullscreen---------------------------------------
 const btnFS=document.querySelector("#btnFS");

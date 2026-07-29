@@ -3,9 +3,9 @@
     font-family: "Montserrat";
     src: url("fonts/Montserrat-VariableFont_wght.ttf");
 }
-@keyframes pulse {
+@keyframes pulse { /* basic animation*/
 	0% { transform: scale(1); }
-	50% { transform: scale(1.1); }
+	50% { transform: scale(1.05); }
 	100% { transform: scale(1); }
 }
 .topButtons
@@ -24,16 +24,20 @@
 {
 	background-color:blue;
 	transition: all 1.5s;
+	animation: pulse 1.5s infinite ease-in-out;
 }
 #goBtn
 {
 	padding: 2%;
 }
+#goBtn:hover
+{
+	animation: pulse 1.5s infinite ease-in-out;  /* basic animation*/
+}
 #topHead
 {
 	display: flex;
 	justify-content: center;
-	animation: pulse 1.5s infinite ease-in-out;
 }
 nav
 {
@@ -49,14 +53,14 @@ body
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	min-height: 100vh;
+	min-height: 100vh;  
 }
 section
 {
 	display: flex;
 	justify-content: center;
 }
-#gamebox
+#gamebox /* the blue ish box that the kayaks are in*/
 {
 	background: rgb(0, 119, 190);
 	border: 2px solid black;
@@ -65,21 +69,29 @@ section
 	height: 25vh;
 	position: relative
 }
+#finish
+{
+	height: 25vh;
+	position: absolute;
+	right: 0;
+}
 #player
 {
 	position: absolute;
-	transition: all 0.2s;
+	transition: all 0.2s; /* basic transition*/
 	top: 90px;
+	z-index: 10;
 }
 #enemykayak
 {
 	position: absolute;
-	transition: all 0.2s;
+	transition: all 0.2s; /* basic transition*/
+	z-index: 10;
 }
-.arrange
+.arrange /* very good for arranging everything column*/
 {
 	flex-direction: column;
-	background: rgba(173, 216, 230, 0.7);
+	background: rgba(173, 216, 230, 0.7); /* semi transparent background*/
     padding: 5%;
     border-radius: 10px;
 	max-width: 80%;
@@ -113,20 +125,21 @@ footer
 #arrange2
 {
 	display:flex;
-	flex-direction: column;
+	flex-direction: column; /* arranges the links */
+}
+.link
+{
 	color: rgba(255, 255, 255, 0.6)
 }
-
-
 .sprite {
-    background-image: url('images/spritesheet.png');
+    background-image: url('images/spritesheet.png');        /* css spritesheet */
     background-repeat: no-repeat;
     display: inline-block;
 	
 	background-size: 650px 1300px;
 	
-	width: 650px;  /* Width of a single icon frame */
-	height: 325px; /* Height of a single icon frame */
+	width: 650px;  /* Width of a single image */
+	height: 325px; /* Height of a single image */
 }
 
 .forwardstroke {
@@ -160,7 +173,7 @@ footer
     background-repeat: no-repeat;
     display: inline-block;
 	
-	background-size: 70vw 130vw;
+	background-size: 70vw 130vw;  /* now it scales with screen size on mobile */
 	
 	width: 70vw;  /* Width of a single icon frame */
 	height: 32.5vw; /* Height of a single icon frame */
@@ -171,7 +184,7 @@ footer
 }
 
 .reversestroke {
-    background-position: -0px -32.5vw;
+    background-position: -0px -32.5vw;  /* now it scales with screen size on mobile */
 }
 
 .sweepstroke {
@@ -185,7 +198,7 @@ footer
 nav
 {
 	display: flex;
-	flex-direction: column;
+	flex-direction: column;  /* makes top buttons align vertically */
 }
 header
 {
@@ -225,7 +238,17 @@ nav
 }
 #test
 {
-	height: 65vh;
+	height: 65vh;  /* only makes the white box in main menu larger so it doesnt look awkward */
+}
+#player
+{
+	height: 55px;
+	width: 60px;
+}
+#enemykayak
+{
+	height: 55px;
+	width: 60px;
 }
 #qrCodeImg{display:none;}
 .mobiledontshow{display:none;}
